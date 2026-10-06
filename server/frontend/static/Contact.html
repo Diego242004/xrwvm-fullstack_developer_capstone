@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contáctenos | Best Cars</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <style>
+    body { background: #f5f7f8; color: #253238; }
+    .contact-nav { background: darkturquoise; padding: 1.25rem; }
+    .contact-nav .navbar-brand { font-size: 1.6rem; font-weight: 700; }
+    .contact-nav .navbar-nav { flex-direction: row; flex-wrap: wrap; gap: 1rem; }
+    .contact-nav .nav-link.active { font-weight: 700; text-decoration: underline; text-underline-offset: .35rem; }
+    .contact-panel { max-width: 960px; margin: 3rem auto; padding: 2rem; background: white; border: 1px solid #dde3e6; border-radius: 36px; box-shadow: 0 3px 0 #aeb4b7; }
+    .dealership-photo { display: block; width: 65%; max-height: 240px; object-fit: cover; margin: 0 auto 1.5rem; }
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; border-top: 1px solid #dde3e6; padding-top: 1.5rem; }
+    .contact-illustration { display: flex; align-items: center; justify-content: center; border-right: 2px solid #606b70; }
+    .contact-illustration img { width: 55%; max-width: 220px; }
+    .contact-panel h1 { text-align: center; }
+    .contact-intro { text-align: center; margin-bottom: 2rem; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
+    .contact-grid h2 { font-size: 1.25rem; color: #614080; }
+    .contact-grid a { color: #24546b; overflow-wrap: anywhere; }
+    .contact-grid address { font-style: normal; }
+    .demo-note { margin-top: 2rem; font-size: .875rem; color: #606b70; }
+    @media (max-width: 600px) { .contact-panel { margin: 1rem; padding: 1.25rem; } .contact-layout { grid-template-columns: 1fr; } .contact-illustration { border-right: 0; } .dealership-photo { width: 100%; } }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand navbar-light contact-nav" aria-label="Navegación principal">
+    <div class="container-fluid flex-wrap">
+      <a class="navbar-brand" href="/">Best Cars</a>
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about/">Sobre nosotros</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/contact/">Contáctenos</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main class="contact-panel">
+    <img class="dealership-photo" src="/static/car_dealership.jpg" alt="Vehículos en un concesionario">
+    <h1>Contáctenos</h1>
+    <p class="contact-intro">En Best Cars te ayudamos a encontrar tu próximo vehículo. Comunícate con nuestro equipo para consultar disponibilidad, agendar una visita o compartir tu experiencia.</p>
+    <div class="contact-layout">
+      <div class="contact-illustration">
+        <img src="/static/contactus.png" alt="Atención al cliente">
+      </div>
+      <div class="contact-grid">
+      <section aria-labelledby="contact-team">
+        <h2 id="contact-team">Habla con nuestro equipo</h2>
+        <p><strong>Atención al cliente</strong><br><a href="mailto:hello@bestcars.example">hello@bestcars.example</a></p>
+        <p><strong>Ventas</strong><br><a href="mailto:sales@bestcars.example">sales@bestcars.example</a></p>
+        <p><strong>Teléfono</strong><br><a href="tel:+12125550148">+1 (212) 555-0148</a></p>
+      </section>
+      <section aria-labelledby="contact-location">
+        <h2 id="contact-location">Visítanos</h2>
+        <address>Best Cars — Oficina central<br>1250 Motor Avenue<br>Springfield, IL 62701<br>Estados Unidos</address>
+        <p>Agenda tu visita con nuestro equipo para conocer las opciones disponibles y recibir atención personalizada.</p>
+      </section>
+      <section aria-labelledby="contact-hours">
+        <h2 id="contact-hours">Horario de atención</h2>
+        <p>Lunes a viernes: 9:00–18:00<br>Sábado: 10:00–16:00<br>Domingo: cerrado</p>
+        <p>Horario local de Springfield, Illinois.</p>
+        <p>También puedes consultar las reseñas de nuestros concesionarios antes de tu visita.</p>
+      </section>
+      </div>
+    </div>
+    <p class="demo-note">Proyecto académico: la dirección, los correos y el teléfono son ficticios.</p>
+  </main>
+</body>
+</html>

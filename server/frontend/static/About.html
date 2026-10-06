@@ -1,21 +1,27 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <!-- Link the style sheet here -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us | Best Cars</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
 </head>
+<body>
 <div>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
     <div class="container-fluid">
-      <h2 style="padding-right: 5%;">Dealerships</h2>
+      <h2 style="padding-right: 5%;">Best Cars</h2>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" style="font-size: larger;" aria-current="page" href="/">Home</a>
+            <a class="nav-link" style="font-size: larger;" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" style="font-size: larger;" href="/about">About Us</a>
+            <a class="nav-link active" style="font-size: larger;" aria-current="page" href="/about/">About Us</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" style="font-size: larger;" href="/contact">Contact Us</a>
@@ -26,43 +32,45 @@
   </nav>
   
     <div class="card" style="width: 80%;margin: auto; margin-top:5%;">
-      <div class="banner" name="about-header">
-      <!-- Insert header information here -->
+      <div class="banner" name="about-header" style="padding: 2rem; text-align: center;">
+      <h1>About Us</h1>
+        <p>Welcome to Best Cars dealership, home to the best cars in North America. We deal in selling domestic and imported cars at reasonable prices.</p>
+        <p>Our team helps you compare vehicles, understand your options, and choose a car that fits your needs. Explore dealership reviews and share your experience with our community.</p>
       </div>
-      <div style="display: flex;flex-direction: row; margin:auto">
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
+      <div style="display: flex;flex-direction: row; flex-wrap: wrap; justify-content: center; margin:auto">
+      <div class="card" style="flex: 1 1 240px; max-width: 320px;">
+        <img class="card-img-top" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=480&h=480&fit=crop&crop=faces" alt="Portrait representing Alex Morgan" style="width: 100%; height: 240px; object-fit: cover;" referrerpolicy="no-referrer">
         <div class="card-body">
-          <p class="title">Person1</p>
-          <p>Person1 Title</p>
-          <p class="card-text">Some text that explains the person1 in about 2 short sentences</p>
-          <p>person1@example.com</p>
+          <p class="title">Alex Morgan</p>
+          <p>General Manager</p>
+          <p class="card-text">Alex leads our team with a focus on clear pricing and friendly service. He helps every department make the car-buying experience easier.</p>
+          <p>alex@bestcars.example</p>
         </div>
       </div>
 
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
+      <div class="card" style="flex: 1 1 240px; max-width: 320px;">
+        <img class="card-img-top" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=480&h=480&fit=crop&crop=faces" alt="Portrait representing Sofia Ramirez" style="width: 100%; height: 240px; object-fit: cover;" referrerpolicy="no-referrer">
         <div class="card-body">
-          <p class="title">Person2</p>
-          <p>Person2 Title</p>
-          <p class="card-text">Some text that explains the person2 in about 2 short sentences</p>
-          <p>person2@example.com</p>
+          <p class="title">Sofia Ramirez</p>
+          <p>Sales Consultant</p>
+          <p class="card-text">Sofia helps customers compare domestic and imported vehicles. She listens to their needs and explains each option in plain language.</p>
+          <p>sofia@bestcars.example</p>
         </div>
       </div>
 
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
+      <div class="card" style="flex: 1 1 240px; max-width: 320px;">
+        <img class="card-img-top" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=480&h=480&fit=crop&crop=faces" alt="Portrait representing James Carter" style="width: 100%; height: 240px; object-fit: cover;" referrerpolicy="no-referrer">
         <div class="card-body">
-          <p class="title">Person3</p>
-          <p>Person3 Title</p>
-          <p class="card-text">Some text that explains the person3 in about 2 short sentences</p>
-          <p>person3@example.com</p>
+          <p class="title">James Carter</p>
+          <p>Customer Experience Specialist</p>
+          <p class="card-text">James supports customers before and after their purchase. He welcomes feedback and helps our dealerships improve their service.</p>
+          <p>james@bestcars.example</p>
         </div>
       </div>
-    </div>
     </div>
     </div>
     
 </div>
 
+</body>
 </html>
