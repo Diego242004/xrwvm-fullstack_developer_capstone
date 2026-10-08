@@ -7,7 +7,9 @@ from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).with_name('.env'))
 backend_url = os.getenv('backend_url', 'http://localhost:3030')
-sentiment_analyzer_url = os.getenv('sentiment_analyzer_url', 'http://localhost:5050/')
+sentiment_analyzer_url = os.getenv(
+    'sentiment_analyzer_url',
+    'http://localhost:5050/')
 
 
 def get_request(endpoint, **kwargs):
@@ -22,7 +24,8 @@ def get_request(endpoint, **kwargs):
 
 
 def analyze_review_sentiments(text):
-    request_url = sentiment_analyzer_url.rstrip('/') + '/analyze/' + quote(text, safe='')
+    request_url = sentiment_analyzer_url.rstrip(
+        '/') + '/analyze/' + quote(text, safe='')
     try:
         response = requests.get(request_url, timeout=15)
         response.raise_for_status()

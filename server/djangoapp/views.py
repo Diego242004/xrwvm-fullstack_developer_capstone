@@ -1,13 +1,10 @@
 # Uncomment the required imports before adding the code
 
-from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from urllib.parse import quote
+from .restapis import get_request, analyze_review_sentiments, post_review
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import logout
-from django.contrib import messages
-from datetime import datetime
-from .models import CarMake, CarModel
+from .models import CarModel
 
 
 from django.http import JsonResponse
@@ -41,9 +38,12 @@ def login_user(request):
     return JsonResponse(data)
 
 # Create a `logout_request` view to handle sign out request
+
+
 def logout_request(request):
     logout(request)
     return JsonResponse({"userName": ""})
+
 
 def get_cars(request):
     if not CarModel.objects.exists():
@@ -76,6 +76,7 @@ def get_cars(request):
 # def add_review(request):
 # ...
 
+
 @csrf_exempt
 def registration(request):
     if request.method != "POST":
@@ -89,10 +90,16 @@ def registration(request):
         email = data['email']
     except (ValueError, KeyError, TypeError):
         return JsonResponse({"error": "Invalid registration data"}, status=400)
-    if not isinstance(username, str) or not username.strip() or not isinstance(password, str) or not password:
-        return JsonResponse({"error": "Username and password are required"}, status=400)
+    if not isinstance(
+            username,
+            str) or not username.strip() or not isinstance(
+            password,
+            str) or not password:
+        return JsonResponse(
+            {"error": "Username and password are required"}, status=400)
     if User.objects.filter(username=username).exists():
-        return JsonResponse({"userName": username, "error": "Already Registered"})
+        return JsonResponse(
+            {"userName": username, "error": "Already Registered"})
     user = User.objects.create_user(
         username=username, password=password, first_name=first_name,
         last_name=last_name, email=email,
@@ -101,54 +108,79 @@ def registration(request):
     return JsonResponse({"userName": username, "status": "Authenticated"})
 
 
-from .restapis import get_request, analyze_review_sentiments, post_review
-from urllib.parse import quote
-
-
 def get_dealerships(request, state='All'):
-    endpoint = '/fetchDealers' if state == 'All' else '/fetchDealers/' + quote(state, safe='')
+    endpoint = '/fetchDealers' if state == 'All' else '/fetchDealers/' + \
+        quote(state, safe='')
     dealerships = get_request(endpoint)
     if dealerships is None:
-        return JsonResponse({'status': 502, 'message': 'Backend unavailable'}, status=502)
+        return JsonResponse(
+            {'status': 502, 'message': 'Backend unavailable'}, status=502)
     return JsonResponse({'status': 200, 'dealers': dealerships})
 
 
 def get_dealer_details(request, dealer_id):
     if dealer_id <= 0:
-        return JsonResponse({'status': 400, 'message': 'Bad Request'}, status=400)
+        return JsonResponse(
+            {'status': 400, 'message': 'Bad Request'}, status=400)
     dealership = get_request('/fetchDealer/' + str(dealer_id))
     if dealership is None:
-        return JsonResponse({'status': 502, 'message': 'Backend unavailable'}, status=502)
+        return JsonResponse(
+            {'status': 502, 'message': 'Backend unavailable'}, status=502)
     return JsonResponse({'status': 200, 'dealer': dealership})
 
 
 def get_dealer_reviews(request, dealer_id):
     if dealer_id <= 0:
-        return JsonResponse({'status': 400, 'message': 'Bad Request'}, status=400)
+        return JsonResponse(
+            {'status': 400, 'message': 'Bad Request'}, status=400)
     reviews = get_request('/fetchReviews/dealer/' + str(dealer_id))
     if reviews is None:
-        return JsonResponse({'status': 502, 'message': 'Backend unavailable'}, status=502)
+        return JsonResponse(
+            {'status': 502, 'message': 'Backend unavailable'}, status=502)
     for review_detail in reviews:
         response = analyze_review_sentiments(review_detail['review'])
-        if not isinstance(response, dict) or response.get('sentiment') not in ('positive', 'neutral', 'negative'):
-            return JsonResponse({'status': 502, 'message': 'Sentiment service unavailable'}, status=502)
+        if not isinstance(
+                response,
+                dict) or response.get('sentiment') not in (
+                'positive',
+                'neutral',
+                'negative'):
+            return JsonResponse(
+                {'status': 502, 'message': 'Sentiment service unavailable'},
+                status=502)
         review_detail['sentiment'] = response['sentiment']
     return JsonResponse({'status': 200, 'reviews': reviews})
 
 
 def add_review(request):
     if not request.user.is_authenticated:
-        return JsonResponse({'status': 403, 'message': 'Unauthorized'}, status=403)
+        return JsonResponse(
+            {'status': 403, 'message': 'Unauthorized'}, status=403)
     if request.method != 'POST':
-        return JsonResponse({'status': 405, 'message': 'POST required'}, status=405)
+        return JsonResponse(
+            {'status': 405, 'message': 'POST required'}, status=405)
     try:
         data = json.loads(request.body)
     except (ValueError, TypeError):
-        return JsonResponse({'status': 400, 'message': 'Invalid review data'}, status=400)
-    required = ('name', 'dealership', 'review', 'purchase', 'purchase_date', 'car_make', 'car_model', 'car_year')
-    if not isinstance(data, dict) or any(field not in data for field in required):
-        return JsonResponse({'status': 400, 'message': 'Missing review fields'}, status=400)
+        return JsonResponse(
+            {'status': 400, 'message': 'Invalid review data'}, status=400)
+    required = (
+        'name',
+        'dealership',
+        'review',
+        'purchase',
+        'purchase_date',
+        'car_make',
+        'car_model',
+        'car_year')
+    if not isinstance(
+            data, dict) or any(
+            field not in data for field in required):
+        return JsonResponse(
+            {'status': 400, 'message': 'Missing review fields'}, status=400)
     response = post_review(data)
     if response is None:
-        return JsonResponse({'status': 502, 'message': 'Error in posting review'}, status=502)
-    return JsonResponse({'status': 200, 'message': 'Review posted successfully'})
+        return JsonResponse(
+            {'status': 502, 'message': 'Error in posting review'}, status=502)
+    return JsonResponse(
+        {'status': 200, 'message': 'Review posted successfully'})

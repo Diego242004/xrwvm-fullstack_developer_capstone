@@ -87,9 +87,10 @@ app.post(
   express.raw({ type: '*/*' }),
   async (req, res) => {
     try {
-      const data = Buffer.isBuffer(req.body)
-        ? JSON.parse(req.body.toString('utf8'))
-        : req.body;
+      let data = req.body;
+      if (Buffer.isBuffer(data)) {
+        data = JSON.parse(data.toString('utf8'));
+      }
 
       const latestReview = await Reviews.findOne().sort({ id: -1 });
       const new_id = latestReview ? latestReview.id + 1 : 1;
